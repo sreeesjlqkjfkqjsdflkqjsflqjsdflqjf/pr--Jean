@@ -5,7 +5,7 @@
 #include "pugixml.hpp"
 #include <iostream>
 using namespace std;
-
+int i{0};
 int myMain() {
   // create the window
   sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
@@ -18,7 +18,7 @@ int myMain() {
               << result.description() << std::endl;
     return 1;
   }
-  Group g{doc.child("Drawing")};
+  Group g{doc.child("Drawing"), 0, 0};
   // run the program as long as the window is open
   while (window.isOpen()) {
     // check all the window's events that were triggered since the last
@@ -33,6 +33,7 @@ int myMain() {
     // clear the window with black color
     window.clear(sf::Color::White);
     g.affiche(window);
+    // std::cout << g.dump();
     // draw everything here...
     // window.draw(...);
 

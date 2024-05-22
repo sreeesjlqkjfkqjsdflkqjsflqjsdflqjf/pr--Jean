@@ -22,7 +22,10 @@ sf::Color Circle::couleur() const {
   };
   return carte[color];
 }
-sf::Vector2d Circle::position() const { return {x, y}; }
+sf::Vector2f Circle::position() const {
+  return {static_cast<float>(x) - static_cast<float>(r) + 300.f,
+          static_cast<float>(y) - static_cast<float>(r) + 300.f};
+}
 std::string Circle::dump(std::string const &indent) const {
   ostringstream oss;
   oss << indent << "Circle " << "\"" << label << "\", " << "x: " << x << ", "
