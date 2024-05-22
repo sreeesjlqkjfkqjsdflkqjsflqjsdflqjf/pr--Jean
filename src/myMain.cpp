@@ -5,14 +5,11 @@
 #include "pugixml.hpp"
 #include <iostream>
 using namespace std;
+
 int myMain() {
-  std::string sc = R"(<?xml version = "1.0 "?>
-                   <Group label="testGroupHybrid" x="0" y="1">
-      <Circle label="testCircle" x="2" y="3" r="4" color="Black" />
-      <Circle label="testCircle" x="2" y="3" r="4" color="Black" />
-      <Group label="testGroup" x="5" y="6">
-      <Circle label="testCircle" x="2" y="3" r="4" color="Black"/>
-    </Group></Group> )";
+  // create the window
+  sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+  // Recup XML
   pugi::xml_document doc;
   if (auto result = doc.load_file("/home/kali-user/Documents/tsp/pre-djin/"
                                   "outilVisualisation/ressources/visage.xml");
@@ -21,21 +18,7 @@ int myMain() {
               << result.description() << std::endl;
     return 1;
   }
-  // pugi::xml_document doc;
-  // pugi::xml_parse_result result = doc.load_string(sc.c_str());
-  // if (!result) {
-  //   cerr << "FOIRÉ! : " << result.description();
-  //   exit(1);
-  // }
   Group g{doc.child("Drawing")};
-  cout << g.dump() << std::endl;
-  return 0;
-}
-
-int main() {
-  // create the window
-  sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
-
   // run the program as long as the window is open
   while (window.isOpen()) {
     // check all the window's events that were triggered since the last
@@ -48,8 +31,8 @@ int main() {
     }
 
     // clear the window with black color
-    window.clear(sf::Color::Black);
-
+    window.clear(sf::Color::White);
+    g.affiche(window);
     // draw everything here...
     // window.draw(...);
 

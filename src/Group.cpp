@@ -1,4 +1,6 @@
 #include "Group.h"
+#include "SFML/Graphics.hpp"
+#include "SFML/Graphics/CircleShape.hpp"
 #include <sstream>
 
 using namespace std;
@@ -12,6 +14,7 @@ Group::Group(const pugi::xml_node &nodeGroup) {
   for (auto groupe : nodeGroup.children("Group")) {
     this->enfant_groupe.push_back(Group{groupe});
   }
+  // auto toto = new char[100000]; creation fuite
 }
 std::string Group::dump(std::string const &indent) const {
   ostringstream oss;
@@ -25,4 +28,15 @@ std::string Group::dump(std::string const &indent) const {
   }
   oss << indent << "]" << endl;
   return oss.str();
+}
+void Group::affiche(sf::RenderWindow &fenêtre) const {
+  for (auto const &c : children) {
+    sf::CircleShape cercle{10};
+    cercle.setFillColor(c.color);
+    fenêtre.draw(cercle);
+  }
+  for (auto const &g : enfant_groupe) {
+    g.affiche(fenêtre);
+  }
+  return;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Circle.h"
+#include "SFML/Graphics.hpp"
 #include "pugixml.hpp"
 #include <string>
 #include <vector>
@@ -13,4 +14,5 @@ public:
   std::vector<Group> enfant_groupe;
   [[nodiscard]] std::string dump(std::string const &indent = "") const;
   Group(const pugi::xml_node &node);
+  void affiche(sf::RenderWindow &fenêtre) const;
 };
